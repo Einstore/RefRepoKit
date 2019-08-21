@@ -1,0 +1,61 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Socket",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket",
+        "state": {
+          "branch": null,
+          "revision": "3cf5de510650d67c551c9e1884fbc9d6e744206b",
+          "version": "1.0.48"
+        }
+      },
+      {
+        "package": "CSSH",
+        "repositoryURL": "https://github.com/jakeheis/CSSH",
+        "state": {
+          "branch": null,
+          "revision": "579a20508ab598f78713a60fed95706efd06bbcb",
+          "version": "1.0.3"
+        }
+      },
+      {
+        "package": "ShellKit",
+        "repositoryURL": "https://github.com/Einstore/ShellKit.git",
+        "state": {
+          "branch": null,
+          "revision": "2b8a0df6edcf9b9d55474e92baef4ea61baca1cb",
+          "version": "1.6.0"
+        }
+      },
+      {
+        "package": "Shout",
+        "repositoryURL": "https://github.com/Einstore/Shout.git",
+        "state": {
+          "branch": null,
+          "revision": "04fc627d6d320a5acaf1308d7a501040df7615a2",
+          "version": "0.5.1"
+        }
+      },
+      {
+        "package": "swift-nio",
+        "repositoryURL": "https://github.com/apple/swift-nio.git",
+        "state": {
+          "branch": null,
+          "revision": "790827800d6af12ca6a8b1dca7a9072606fd2a1e",
+          "version": "2.7.0"
+        }
+      },
+      {
+        "package": "WebError",
+        "repositoryURL": "https://github.com/Einstore/WebErrorKit.git",
+        "state": {
+          "branch": null,
+          "revision": "183170b95c46ca5a900d0ea870980c9c280a573a",
+          "version": "0.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
