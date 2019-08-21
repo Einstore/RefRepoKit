@@ -27,6 +27,10 @@ let package = Package(
         ),
         .testTarget(
             name: "RefRepoKitTests",
+            dependencies: ["RefRepoKit", "NIO", "CommandKit", "ExecutorMocks"]
+        ),
+        .testTarget(
+            name: "RefRepoKitRealTests",
             dependencies: ["RefRepoKit", "NIO", "CommandKit"]
         )
     ]

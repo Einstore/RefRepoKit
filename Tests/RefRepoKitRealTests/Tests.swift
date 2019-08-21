@@ -2,7 +2,12 @@
 import XCTest
 import NIO
 import CommandKit
-import ExecutorMocks
+
+
+/*
+ Warning: The below tests rely on an external service which in a testing environment should be a NO-GO but for the convenience and as this package needs github to work we have decided to test the actual real functionality without mocks ond stubs !!!!!!!!
+ Also! Tests should not be run in parallel
+ */
 
 
 final class RefRepoTests: XCTestCase {
@@ -11,7 +16,7 @@ final class RefRepoTests: XCTestCase {
     let repoHTTPS = "https://github.com/Einstore/ShellKit.git"
     
     var ref: RefRepo!
-    var shell: MasterExecutor!
+    var shell: Shell!
     
     var output: String = ""
     
@@ -20,16 +25,17 @@ final class RefRepoTests: XCTestCase {
         
         let eventLoop = EmbeddedEventLoop()
         
-        let shell = ExecutorMock()
-        
         ref = try! RefRepo(
-            shell,
+            .local,
             temp: "/tmp/test-refrepo/",
             on: eventLoop)
         { text in
             print(text)
             self.output += text
         }
+        
+        shell = try! Shell(.local(dir: "/tmp"), on: eventLoop)
+        shell.outputCommands = false
         
         _ = try! shell.cmd.rm(path: ref.tmp(for: repoSSH), flags: "-rf").wait()
         _ = try! shell.cmd.rm(path: ref.tmp(for: repoHTTPS), flags: "-rf").wait()
@@ -97,7 +103,7 @@ final class RefRepoTests: XCTestCase {
     
     func testFetchSSH() {
         ref.sshKeys.append("id_rsa.0")
-        _ = try! shell.run(bash: "git clone \(repoSSH) \(ref.tmp(for: repoSSH))", output: nil).future.wait()
+        _ = try! shell.run(bash: "git clone \(repoSSH) \(ref.tmp(for: repoSSH))").future.wait()
         
         let string = try! ref.clone(repo: repoSSH, checkout: "master", target: "/tmp/test-refrepo/clones/test-stuff", workspace: "/tmp/test-refrepo/clones/").wait()
         
@@ -111,7 +117,7 @@ final class RefRepoTests: XCTestCase {
     }
     
     func testFetchHTTPS() {
-        _ = try! shell.run(bash: "git clone \(repoHTTPS) \(ref.tmp(for: repoSSH))", output: nil).future.wait()
+        _ = try! shell.run(bash: "git clone \(repoHTTPS) \(ref.tmp(for: repoSSH))").future.wait()
         
         let string = try! ref.clone(repo: repoHTTPS, checkout: "master", target: "/tmp/test-refrepo/clones/test-stuff", workspace: "/tmp/test-refrepo/clones/").wait()
         
